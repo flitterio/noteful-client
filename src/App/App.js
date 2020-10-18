@@ -21,6 +21,11 @@ class App extends Component {
           notes: [ ...this.state.notes, newNote ],
         })
       }
+      addFolder = newFolder => {
+        this.setState({
+          notes: [ ...this.state.folders, newFolder ],
+        })
+      }
     componentDidMount(){
         Promise.all([
             fetch(`${config.API_ENDPOINT}/notes`),

@@ -15,7 +15,7 @@ class AddNote extends Component{
 //};
 
 handleSubmit=(event) => {
-    event.preventDefault();
+    event.preventDefault()
     const {name, content, selectFolder} = event.target
     const newNote = {
         name: name.value,
@@ -28,13 +28,7 @@ handleSubmit=(event) => {
         folderId: PropTypes.string.isRequired
     };
 
-    newNote.defaultProps = {
-        name: " ",
-        content: " ",
-       folderId: " "
-    }
-
-
+    
     this.setState({ error: null})
     fetch(`${config.API_ENDPOINT}/notes`, {
         method: 'POST',
@@ -65,28 +59,30 @@ handleSubmit=(event) => {
  };
 
     render() {
-        const { folders=[]} = this.context
+        const {folders=[]} = this.context
         return (
         <form className='addNote' onSubmit={this.handleSubmit}>
                  <h2>Create a New Note </h2>
             <div className='noteForm'>
                 <div className='form-group'>
-                    <label htmlFor='noteName'>
+                    <label htmlFor='name'>
                         Enter Note Name:
                         {' '}
                         </label>
-                    <input type='text' className='addNote' name='noteName' id='noteName'/>
+                    <input type='text' 
+                    className='addNote' name='name' id='name' required/>
                  </div>
             <div className='form-group'>
-                <label htmlFor='noteContent'>
+                <label htmlFor='content'>
                     Enter Note Content:
-                    {' '} 
+                  
                     </label>
-                <textarea name='noteContent' id='noteContent'/>
+                <textarea name='content' id='content' required/>
             </div>
             <div className='addNote'>
                 <label htmlFor='selectFolder'>Select a Folder</label>
-                <select name='selectFolder' id='selectFolder'>
+                <select name='selectFolder' id='selectFolder' required>
+                    <option key='default' defaultValue value='' >Select...</option>
                  {folders.map((folder) => (
                      <option key={folder.id} value={folder.id}> {folder.name}</option>
                  ))}  
